@@ -17,8 +17,8 @@ class FlightsMap extends React.Component {
                     position={{lat: airport.airport_position[0], lng: airport.airport_position[1]}}
                     icon={{
                         url: "https://upload.wikimedia.org/wikipedia/commons/c/cb/White_circle_in_blue_background.png",
-                        anchor: new window.google.maps.Point(32,32),
-                        scaledSize: new window.google.maps.Size(35,35)
+                        anchor: new window.google.maps.Point(15,15),
+                        scaledSize: new window.google.maps.Size(30,30)
                       }}
                     />
             })}
@@ -29,8 +29,8 @@ class FlightsMap extends React.Component {
                     position={positions[positions.length - 1]}
                     icon={{
                         url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Legenda_lotnisko.svg/128px-Legenda_lotnisko.svg.png",
-                        anchor: new window.google.maps.Point(32,32),
-                        scaledSize: new window.google.maps.Size(35,35)
+                        anchor: new window.google.maps.Point(15,15),
+                        scaledSize: new window.google.maps.Size(30,30)
                       }}
                     />
             })}
@@ -54,7 +54,7 @@ export default compose(
     withProps({
       googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBzFqxu4HsUYVe_LQtFbPLZvoU_9IWamQk",
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ height: `600px` }} />,
+      containerElement: <div style={{ height: `700px` }} />,
       mapElement: <div style={{ height: `100%` }} />,
     }),
     withScriptjs,
