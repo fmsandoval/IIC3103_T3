@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, InfoWindow, Marker, Polyline, GoogleApiWrapper} from 'google-maps-react';
 
 class MapContainer extends Component {
     render() {
@@ -11,7 +11,7 @@ class MapContainer extends Component {
                     lat: -33.447487,
                     lng: -70.673676
                     }}
-                zoom={5}>
+                zoom={3}>
                 {Object.values(this.props.airports).map(function(airport) {
                     return <Marker key={airport.airport_code}
                         name={airport.name}
@@ -33,6 +33,17 @@ class MapContainer extends Component {
                             anchor: new window.google.maps.Point(32,32),
                             scaledSize: new window.google.maps.Size(35,35)
                         }} />
+                })}
+
+                {Object.values(this.props.flights).map(function(flight) {
+                    const { positions, code, plane } = flight;
+                    if (!positions.length) return null;
+                    return <Polyline key={code + ' Real Path'}
+                        name={plane + ' Real Path'}
+                        path={positions}
+                        strokeColor="#0000FF"
+                        strokeOpacity={1}
+                        strokeWeight={5} />
                 })}
             </Map>
         );

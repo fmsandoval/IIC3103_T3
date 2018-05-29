@@ -67,11 +67,11 @@ class App extends Component {
         </header>
         <br/><br/>
         <button onClick={this.requestAirports.bind(this)}>
-          Airports
+          Update Airports
         </button>
         <br/><br/>
         <button onClick={this.requestFlights.bind(this)}>
-          Flights
+          Update Flights
         </button>
         <br/><br/>
         <Map airports={this.state.airports} flights={this.state.flights}/>
