@@ -36,26 +36,31 @@ class App extends Component {
     this.socket.emit("FLIGHTS");
   }
 
-  _onPositionUpdate(position_data) {
-    const flights = this.state.flights;
-    const flight = flights[position_data.code];
-    flight.positions.push({ lat: position_data.position[0], lng: position_data.position[1] });
-    flights[position_data.code] = flight;
-    this.setState({ flights });
-  }
-
-  _onAirportsUpdate(airports_data) {
-    this.setState({ airports: airports_data });
-  }
-
-  _onFlightsUpdate(flights_data) {
-    const updated_flights = {};
-    const { flights } = this.state;
-    flights_data.forEach(function(flight_data) {
-      flight_data.positions = (flights && flights[flight_data.code] && flights[flight_data.code].positions) || [];
-      updated_flights[flight_data.code] = flight_data;
+  _onPositionUpdate(positionData) {
+    const updatedFlights = Object.assign({}, this.state.flights);
+    const flight = updatedFlights[positionData.code];
+    const newPositions = [];
+    flight.positions.forEach(function (position){
+      newPositions.push(position);
     });
-    this.setState({ flights: updated_flights });
+    newPositions.push({ lat: positionData.position[0], lng: positionData.position[1] });
+    flight.positions = newPositions;
+    updatedFlights[positionData.code] = flight;
+    this.setState({ flights: updatedFlights });
+  }
+
+  _onAirportsUpdate(airportsData) {
+    this.setState({ airports: airportsData });
+  }
+
+  _onFlightsUpdate(flightsData) {
+    const updatedFlights = {};
+    const { flights } = this.state;
+    flightsData.forEach(function(flightData) {
+      flightData.positions = (flights && flights[flightData.code] && flights[flightData.code].positions) || [];
+      updatedFlights[flightData.code] = flightData;
+    });
+    this.setState({ flights: updatedFlights });
   }
 
   render() {
